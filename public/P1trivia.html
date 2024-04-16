@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <title>Trivia Game</title>
@@ -8,138 +7,146 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="style.css">
   <style>
-    body{
+    body {
       background-image: url("https://cdn.nitrome.com/generated-content/images/winter/tile.png");
+    }
+    h1{
+      margin-top: 80px;
     }
     .correct {
       animation: glow-green 2.2s infinite alternate;
     }
-
     .wrong {
       animation: glow-red 2.2s infinite alternate;
     }
-
     @keyframes glow-green {
       from {
         box-shadow: 0 0 5px green;
       }
-
       to {
         box-shadow: 0 0 20px green;
       }
     }
-
     @keyframes glow-red {
       from {
         box-shadow: 0 0 5px red;
       }
-
       to {
         box-shadow: 0 0 20px red;
       }
     }
-
     .w3-display-middle {
-    position: absolute; 
-    top: 50px;
-    left: 50%;  
-    transform: translateX(-50%); 
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    align-items: center; 
-  }
-  #container {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    #container {
       text-align: center;
       padding: 20px;
       border-radius: 10px;
     }
     #Choices li:hover {
-      background-color: lightgray;
+      background-color: rgb(117, 255, 255);
       cursor: pointer;
     }
     @media only screen and (max-width: 600px) {
       #container {
         padding: 10px;
       }
-
       h1 {
-        font-size: 24px;
+        font-size: 20px;
+        margin-left: 20px;
       }
-
       #trivia {
-        font-size: 18px;
+        font-size: 14px;
       }
-
       #answers {
-        font-size: 16px;
+        font-size: 14px;
       }
-
       #score,
       #targetDisplay,
       #timer {
         font-size: 14px;
       }
+      .Clock{
+        width: 100px;
+        height: 40px;
+        font-size: smaller;
+        padding: auto;
+      }
+    }
+    .Clock {
+      width: 200px;
+      height: 70px;
+      margin-left: 5px;
+      margin-top: 5px;
+      margin-right: 30px;
+      background: cyan;
+      color: black;
+      padding-top: 10px;
+      border-radius: 150px;
+      text-align: center;
+      font-size: 30px;
     }
   </style>
 </head>
-
 <body>
   <div class="w3-display-container">
+    <div class="Clock">
+        <div id="timer"><span id="Minute">00</span>:<span id="timer-display">00</span></div>
+      </div>
+    </div>
     <div class="w3-display-middle">
-      <h1 class="w3-xxlarge w3-text-white w3-wide">
-  <div class="row">
-    <h2 id="result"></h2>
+      <h1 class="w3-xxlarge w3-text-white w3-wide">Trivia Game</h1>
+      <div id="targetDisplay"></div>
+      <div id="trivia"></div>
+      <div id="container">
+        <ul id="Choices"></ul>
+        <div id="score">Score: 0</div>
+      </div>
+    </div>
   </div>
- <h1>Trivia Game</h1>
- 
- <div id="trivia"></div>
- 
-  <div id="container">
-    <ul id="Choices"></ul>
-    <div id="score">Score: 0</div>
-    <div id="targetDisplay"></div>
-    <div id="timer">Time: <span id="timer-display">0</span> seconds</div>
-  </div>
-        </div>
-        </div>
   <script src="script.js"></script>
   <script>
     let maxTime = 0; 
-    window.onload = function () {
+    window.onload = function() {
       const Timing = localStorage.getItem('Time');
-      maxTime = 60 * Timing; 
+      maxTime = 60 * parseInt(Timing, 10); 
       const target = localStorage.getItem('target');
       document.getElementById('targetDisplay').innerText = 'Target to beat: ' + target;
       startTimer();
     };
-    let result = document.querySelector('#result');
-    let timerDisplay = document.querySelector('#timer-display'); // Reference to the timer display element
-
+    let timerDisplay = document.querySelector('#timer-display');
+    let minuteDisplay = document.querySelector('#Minute');
     let timer;
-    let elapsedTime = 0;
-    
 
-    // Check if the elapsed time has reached the maximum time
     function timestop() {
-      elapsedTime++;
-      timerDisplay.textContent = elapsedTime;
-      if (elapsedTime >= maxTime) {
+      maxTime--;
+      let minutes = Math.floor(maxTime / 60);
+      let seconds = maxTime % 60;
+      minuteDisplay.textContent = minutes < 10 ? '0' + minutes : minutes;
+      timerDisplay.textContent = seconds < 10 ? '0' + seconds : seconds;
+
+      if (maxTime < 0) {
         stopTimer();
-        alert("Times up you scored " + score + " points");
+        let score = document.getElementById('score').textContent.split(': ')[1];
+        alert("Time's up! You scored " + score + " points.");
         window.location.reload();
       }
     }
+
     function startTimer() {
-      // Execute printDate() every second
       timer = setInterval(timestop, 1000);
     }
 
     function stopTimer() {
-      clearInterval(timer); // Stop the timer
+      clearInterval(timer);
     }
-
   </script>
 </body>
-
 </html>
