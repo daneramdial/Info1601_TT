@@ -130,19 +130,28 @@
       </li>
     </ul>
   </div>
-<script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";></script>
-<script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";></script>
+  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"></script>
-<script>
-import firebaseConfig from "./firebaseConfig.js";
+  <script>
 
-const auth =firebase.auth();
-const db = firebase.firestore();
-
-db.settings({ timestampsInSnapshots: true});
-</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="auth.js"></script>
-  <script src="login.js"></script>
+    const Config={
+      apiKey: "AIzaSyBd5zji0Kd04frEvXYWR9dvIiMozMCC6q4",
+        authDomain: "triviatime-1c31d.firebaseapp.com",
+        projectId: "triviatime-1c31d",
+        storageBucket: "triviatime-1c31d.appspot.com",
+        messagingSenderId: "385717513256",
+        appId: "1:385717513256:web:b62e51b5f160a11050191d",
+        measurementId: "G-33GMW5QP64"
+    }
+    firebase.initializeApp(Config);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <script src="auth.js"></script>
+   <script src="login.js"></script>
+  
 </body>
 </html>
