@@ -1,19 +1,199 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>Retrieve Settings</title>
-</head>
+  <meta charset="UTF-8">
+  <title>Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="style.css">
+  </head>
+  <style>
+ body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-image {
+  /* The image used */
+  background-image: url("https://cdn.nitrome.com/generated-content/images/dittoskin/tile.png");
+  
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  
+  /* Full height */
+  height: 100%; 
+  
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#container{
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
+}
+
+
+  </style>
 
 <body>
-  <h1>Game Page</h1>
-  <div id="targetDisplay"></div>
-  <script>
-    window.onload = function () {
+  <div class="bg-image"></div>
+  <div id="container">
+<div id="Difficulty"></div>
+ <div id="image"><img id="dynamic-image" src="" alt="Dynamic Image" height="210px"></div>
+<div id="Time"></div>
+<div id="Score"></div>
+<div id="Comment"></div>
+</div>
+<script>
+    let selectedDifficulty = null;
+    let selectedTime = null;
+    let SScored=null;
+    let Target=null;
+    let imageElement = document.getElementById('dynamic-image');
+    window.onload = function() {
       const target = localStorage.getItem('target');
-      document.getElementById('targetDisplay').innerText = 'Target: ' + target;
-    };
-  </script>
-</body>
+      Target=target;
+      const Timing = localStorage.getItem('Time');
+      selectedTime=Timing;
+      document.getElementById('Time').innerHTML='In: ' + Timing + ' minutes';
+      const difficulty=localStorage.getItem('Difficulty');
+      selectedDifficulty=difficulty;
+     document.getElementById('Difficulty').innerHTML='Difficult: '+ difficulty;
+      const scored=localStorage.getItem('Score');
+      SScored=scored;
+    document.getElementById('Score').innerHTML='You scored: ' + scored;
+    reward();
+    }
 
+    function reward(){
+      if (selectedDifficulty === 'Easy' && selectedTime === '1' && Target===SScored) {
+           document.getElementById('Comment').innerHTML='Right on the money'; 
+           imageElement.src="https://p16-va.lemon8cdn.com/tos-maliva-v-ac5634-us/o0fjvhAj4eIu3fHZAYsvefimhgUQutAfzhAQzg~tplv-tej9nj120t-origin.webp";
+            }
+      else if (selectedDifficulty === 'Easy' && selectedTime === '1' && SScored>Target) {
+           document.getElementById('Comment').innerHTML='Do NOT be too proud this was easy mode';
+          imageElement.src="https://facts.net/wp-content/uploads/2023/09/21-facts-about-megamind-megamind-1694564443.jpg";
+            }
+       else if(selectedDifficulty === 'Easy' && selectedTime === '1' && SScored<Target) {
+           document.getElementById('Comment').innerHTML='Hi Pat'; 
+           imageElement.src ="https://w0.peakpx.com/wallpaper/798/76/HD-wallpaper-patrick-bob-squarepants-star-thumbnail.jpg";
+            }     
+           else if (selectedDifficulty === 'Medium' && selectedTime === '1' && Target===SScored) {
+           document.getElementById('Comment').innerHTML='For Gru'; 
+           imageElement.src="https://www.rollingstone.com/wp-content/uploads/2018/06/rs-150371-20130708-mrev-despicable-me-2-624x420-1373308830.jpg?w=624";
+            }
+      else if (selectedDifficulty === 'Mediun' && selectedTime === '1' && SScored>Target) {
+           document.getElementById('Comment').innerHTML='Yippie';
+          imageElement.src="https://s.yimg.com/ny/api/res/1.2/6cYGcOM.NEkZQRE27axZdg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQzNA--/https://media.zenfs.com/en/tvline.com/8f96f1722e622e271c6f23ca69e4ab80";
+            }
+       else if(selectedDifficulty === 'Medium' && selectedTime === '1' && SScored<Target) {
+           document.getElementById('Comment').innerHTML='...'; 
+           imageElement.src ="https://static1.cbrimages.com/wordpress/wp-content/uploads/2018/04/aladdin-genie.jpg";
+            } 
+            else if (selectedDifficulty === 'Hard' && selectedTime === '1' && Target===SScored) {
+           document.getElementById('Comment').innerHTML='For the first time'; 
+           imageElement.src="https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters/large/800/Olaf.Frozen.webp";
+            }
+      else if (selectedDifficulty === 'Hard' && selectedTime === '1' && SScored>Target) {
+           document.getElementById('Comment').innerHTML='Lasagna';
+          imageElement.src="https://wwwflickeringmythc3c8f7.zapwp.com/q:i/r:0/wp:1/w:1/u:https://cdn.flickeringmyth.com/wp-content/uploads/2023/12/Garfield-poster-1-600x326.jpg";
+            }
+       else if(selectedDifficulty === 'Hard' && selectedTime === '1' && SScored<Target) {
+           document.getElementById('Comment').innerHTML='You are not an elite employee'; 
+           imageElement.src ="https://images.bauerhosting.com/legacy/media/616e/903d/1095/6e36/3995/6099/boss-baby-2.jpg?ar=16:9&fit=crop&crop=top";
+            } 
+         else  if (selectedDifficulty === 'Easy' && selectedTime === '3' && Target===SScored) {
+           document.getElementById('Comment').innerHTML='BA BA shaun'; 
+           imageElement.src="https://blog.scienceandmediamuseum.org.uk/wp-content/uploads/2019/10/shaun1.jpg";
+            }
+      else if (selectedDifficulty === 'Easy' && selectedTime === '3' && SScored>Target) {
+           document.getElementById('Comment').innerHTML='Nice';
+          imageElement.src="https://m.media-amazon.com/images/S/pv-target-images/d3b7ea073f9b0f3672d84277de06ea1df12aa69bd02ad2a88fbbad7eb624759b._SX1080_FMjpg_.jpg";
+            }
+       else if(selectedDifficulty === 'Easy' && selectedTime === '3' && SScored<Target) {
+           document.getElementById('Comment').innerHTML='This one might be...'; 
+           imageElement.src ="https://m.media-amazon.com/images/M/MV5BMTg3Mjc3ODM5MF5BMl5BanBnXkFtZTgwMjkzMTU3OTE@._V1_.jpg";
+            } 
+            else if (selectedDifficulty === 'Medium' && selectedTime === '3' && Target===SScored) {
+           document.getElementById('Comment').innerHTML='You did it hops'; 
+           imageElement.src="https://www.comingsoon.net/wp-content/uploads/sites/3/2023/10/Zootopia-2-Release-Date.jpg";
+            }
+      else if (selectedDifficulty === 'Mediun' && selectedTime === '3' && SScored>Target) {
+           document.getElementById('Comment').innerHTML='yaaaaaaaaaaaaaay';
+          imageElement.src="https://images.ctfassets.net/3m6gg2lxde82/2Cap0kPnNIkzoMiwlgwruT/c84782d80bb49a8ba7890cd2e9fa87d1/sing_2.jpg?w=2048&h=1137&fit=fill&f=faces&fm=webp&q=80";
+            }
+       else if(selectedDifficulty === 'Medium' && selectedTime === '3' && SScored<Target) {
+           document.getElementById('Comment').innerHTML='To infinite and below'; 
+           imageElement.src ="https://assets1.ignimgs.com/2017/06/21/toy-story-2-1498065310768.jpg";
+            }    
+            else if (selectedDifficulty === 'Hard' && selectedTime === '3' && Target===SScored) {
+           document.getElementById('Comment').innerHTML='That is not Alvin'; 
+           imageElement.src="https://img.freepik.com/photos-premium/alvin-personnage-chipmunks-chemise-verte-softfocus_899449-22128.jpg";
+            }
+      else if (selectedDifficulty === 'Hard' && selectedTime === '3' && SScored>Target) {
+           document.getElementById('Comment').innerHTML='Dragon Warrior';
+          imageElement.src="https://static1.srcdn.com/wordpress/wp-content/uploads/2024/03/po-in-kung-fu-panda-4.jpg";
+            }
+       else if(selectedDifficulty === 'Hard' && selectedTime === '3' && SScored<Target) {
+           document.getElementById('Comment').innerHTML='You forgot'; 
+           imageElement.src ="https://www.hollywoodreporter.com/wp-content/uploads/2014/12/dory_a_l.jpg";
+            }   
+            else  if (selectedDifficulty === 'Easy' && selectedTime === '5' && Target===SScored) {
+           document.getElementById('Comment').innerHTML='The chipmunks everybody'; 
+           imageElement.src="https://wallpapers.com/images/hd/alvin-and-the-chipmunks-pictures-biomfgzynrvggxpy.jpg";
+            }
+      else if (selectedDifficulty === 'Easy' && selectedTime === '5' && SScored>Target) {
+           document.getElementById('Comment').innerHTML='Zoooooooom';
+          imageElement.src="https://nypost.com/wp-content/uploads/sites/2/2014/07/planes_fire___rescue.jpg?quality=75&strip=all";
+            }
+       else if(selectedDifficulty === 'Easy' && selectedTime === '5' && SScored<Target) {
+           document.getElementById('Comment').innerHTML='Bro is lost'; 
+           imageElement.src ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJZzBRjp91Z2wkdSjFkkLal5cqx7MD8k8fS0IJmc-cUg&s";
+            } 
+            else if (selectedDifficulty === 'Medium' && selectedTime === '5' && Target===SScored) {
+           document.getElementById('Comment').innerHTML='You really have a MegaMind'; 
+           imageElement.src="https://facts.net/wp-content/uploads/2023/09/21-facts-about-megamind-megamind-1694564443.jpg";
+            }
+      else if (selectedDifficulty === 'Mediun' && selectedTime === '5' && SScored>Target) {
+           document.getElementById('Comment').innerHTML='';
+          imageElement.src="https://images.ctfassets.net/3m6gg2lxde82/2Cap0kPnNIkzoMiwlgwruT/c84782d80bb49a8ba7890cd2e9fa87d1/sing_2.jpg?w=2048&h=1137&fit=fill&f=faces&fm=webp&q=80";
+            }
+       else if(selectedDifficulty === 'Medium' && selectedTime === '5' && SScored<Target) {
+           document.getElementById('Comment').innerHTML='Hotel Trivago'; 
+           imageElement.src ="https://facts.net/wp-content/uploads/2023/09/23-facts-about-dracula-hotel-transylvania-1693979763.jpg";
+            }    
+            else if (selectedDifficulty === 'Hard' && selectedTime === '5' && Target===SScored) {
+              document.getElementById('Comment').innerHTML='They really like that Shrek';
+          imageElement.src="https://variety.com/wp-content/uploads/2021/03/Shrek-Eddie-Murphy-1.jpg";
+            }
+      else if (selectedDifficulty === 'Hard' && selectedTime === '5' && SScored>Target) {
+           document.getElementById('Comment').innerHTML='Just Goat things';
+          imageElement.src="https://i0.wp.com/isoccerng.com/wp-content/uploads/2022/11/Messi-Ronaldo-e1668888789689.jpg?fit=1079%2C809&ssl=1&is-pending-load=1";
+            }
+       else if(selectedDifficulty === 'Hard' && selectedTime === '5' && SScored<Target) {
+           document.getElementById('Comment').innerHTML='Your Fired'; 
+           imageElement.src ="https://static1.moviewebimages.com/wordpress/wp-content/uploads/2022/12/regular-show-slapstick-1200-x630.jpg";
+            }    
+
+    }
+</script>
+</body>
 </html>
